@@ -65,4 +65,6 @@ CREATE TABLE chunks (
     embedding    VECTOR(384),                       -- bge-small-en-v1.5 outputs 384 dims
     UNIQUE (document_id, chunk_index)
 );
--- Phase 2 task: you will add the vector index here yourself (and explain why HNSW).
+-- Approximate nearest-neighbour index. vector_cosine_ops must match the <=> (cosine) operator
+-- used in queries. scripts/ingest.py also creates it, for databases initialised before this line.
+CREATE INDEX chunks_embedding_hnsw ON chunks USING hnsw (embedding vector_cosine_ops);

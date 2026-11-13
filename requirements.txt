@@ -1,5 +1,5 @@
 # Core API, database and test dependencies
-fastapi==0.115.*
+fastapi>=0.164  # 0.115 pins starlette<0.47, which conflicts with mcp 2.x
 uvicorn[standard]==0.32.*
 pydantic-settings==2.*
 psycopg[binary]==3.2.*
@@ -10,3 +10,6 @@ redis==5.*
 pytest==8.*
 pytest-asyncio==0.24.*
 httpx==0.27.*
+
+# Phase 2: embeddings (pulls in PyTorch)
+sentence-transformers==3.*

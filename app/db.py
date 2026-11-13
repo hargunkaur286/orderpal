@@ -1,3 +1,4 @@
+from pgvector.psycopg import register_vector_async
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 
@@ -13,4 +14,5 @@ def make_pool() -> AsyncConnectionPool:
         max_size=10,
         kwargs={"row_factory": dict_row},   # rows come back as dicts, not tuples
         open=False,                          # opened explicitly in the app lifespan
+        configure=register_vector_async,     # each new connection learns the pgvector type
     )
