@@ -1,0 +1,90 @@
+// One question per line. "relevant" = the chunk label(s) that answer it (see --list).
+// More than one label = any of them counts as a hit. [] = out of scope: nothing in the docs answers it.
+// "type" groups questions by kind, so failures can be analysed per type.
+{"q": "how long does a card refund take", "relevant": ["Refund Policy > How and when the money comes back"], "type": "direct"}
+{"q": "my money hasn't come back yet", "relevant": ["Refund Policy > How and when the money comes back"], "type": "paraphrase"}
+{"q": "the order is 40 minutes late, can I still cancel without paying?", "relevant": ["Cancellation Policy > After the restaurant accepts the order", "Delivery Delays and ETA > The on-time promise"], "type": "multi-doc"}
+{"q": "what is your delivery partner's salary", "relevant": [], "type": "out-of-scope"}
+{"q": "Ordered last night, eligible for refund?", "relevant": ["Refund Policy > Time limits", "Refund Policy > When you are eligible for a refund"], "type": "paraphrase"}
+{"q": "The condiments I ordered along with the food were expired, can I ask for a refund?", "relevant": ["Refund Policy > When you are eligible for a refund"], "type": "paraphrase"}
+{"q": "My food is 50 minutes late than the promised time, I want to cancel the order", "relevant": ["Cancellation Policy > After the restaurant accepts the order", "Delivery Delays and ETA > The on-time promise"], "type": "multi-doc"}
+{"q": "I ordered by mistake, can I cancel the order?", "relevant": ["Cancellation Policy > Free cancellation window"], "type": "paraphrase"}
+{"q": "I got the wrong order", "relevant": ["Refund Policy > When you are eligible for a refund"], "type": "paraphrase"}
+{"q": "I got an allergy after eating the food", "relevant": ["Allergens and Food Safety > If you have an allergic reaction"], "type": "paraphrase"}
+{"q": "The dish had peanuts, which wasn't mentioned in the ingredients list", "relevant": ["Allergens and Food Safety > Allergen information on menus"], "type": "paraphrase"}
+{"q": "I want the same delivery partner who delivered my order last time", "relevant": [], "type": "out-of-scope"}
+{"q": "what time food last?", "relevant": [], "type": "vague"}
+{"q": "mera food kab tak deliver ho jaayega?", "relevant": ["Delivery Delays and ETA > How the ETA is calculated", "Delivery Delays and ETA > Tracking"], "type": "hinglish"}
+{"q": "what's the name of the chef that's making my food?", "relevant": [], "type": "out-of-scope"}
+{"q": "How do I know my pastry doesn't contain eggs in it?", "relevant": ["Allergens and Food Safety > Allergen information on menus", "Allergens and Food Safety > Vegetarian and vegan labels"], "type": "paraphrase"}
+{"q": "can I have an estimate of how much amount will I get refunded", "relevant": ["Refund Policy > When you are eligible for a refund"], "type": "paraphrase"}
+{"q": "does my food pass all the standards", "relevant": ["Allergens and Food Safety > Food safety standards"], "type": "paraphrase"}
+{"q": "Can I cancel my order and get full refund?", "relevant": ["Cancellation Policy > Free cancellation window"], "type": "paraphrase"}
+{"q": "what is the free cancellation window", "relevant": ["Cancellation Policy > Free cancellation window"], "type": "direct"}
+{"q": "how is the estimated delivery time calculated", "relevant": ["Delivery Delays and ETA > How the ETA is calculated"], "type": "direct"}
+{"q": "when does the on-time promise not apply", "relevant": ["Delivery Delays and ETA > When the promise does not apply"], "type": "direct"}
+{"q": "can I cancel a scheduled order", "relevant": ["Cancellation Policy > Scheduled orders"], "type": "direct"}
+{"q": "restaurant cancelled my biryani order on their own, do I get anything extra?", "relevant": ["Cancellation Policy > Cancellations by the restaurant or OrderPal"], "type": "paraphrase"}
+{"q": "I've asked for refunds a lot this month, why is my new one taking so long?", "relevant": ["Refund Policy > Repeated refund requests"], "type": "paraphrase"}
+{"q": "the rider's location on the map hasn't moved for ages", "relevant": ["Delivery Delays and ETA > Tracking"], "type": "paraphrase"}
+{"q": "I tipped the delivery guy by mistake, can I get it back?", "relevant": ["Refund Policy > What is not refundable"], "type": "paraphrase"}
+{"q": "is vegan food on the app actually checked?", "relevant": ["Allergens and Food Safety > Vegetarian and vegan labels"], "type": "paraphrase"}
+{"q": "what things will you NOT refund?", "relevant": ["Refund Policy > What is not refundable"], "type": "negation"}
+{"q": "why can't I cancel from the app anymore? the rider already picked it up", "relevant": ["Cancellation Policy > After the order is out for delivery"], "type": "negation"}
+{"q": "it's pouring outside and my order is super late, do I still get the late credit?", "relevant": ["Delivery Delays and ETA > When the promise does not apply", "Delivery Delays and ETA > The on-time promise"], "type": "negation"}
+{"q": "refund kitne din mein aayega card pe?", "relevant": ["Refund Policy > How and when the money comes back"], "type": "hinglish"}
+{"q": "order cancel karna hai, restaurant ne already bana diya, paise katenge kya?", "relevant": ["Cancellation Policy > After the restaurant accepts the order"], "type": "hinglish"}
+{"q": "refund?", "relevant": ["Refund Policy > When you are eligible for a refund", "Refund Policy > How and when the money comes back", "Refund Policy > Time limits"], "type": "vague"}
+{"q": "late order", "relevant": ["Delivery Delays and ETA > The on-time promise"], "type": "vague"}
+{"q": "food came 70 minutes late and was cold, what do I get back?", "relevant": ["Delivery Delays and ETA > The on-time promise", "Refund Policy > When you are eligible for a refund"], "type": "multi-doc"}
+{"q": "I had a reaction to a dish that wasn't tagged with my allergen, what now?", "relevant": ["Allergens and Food Safety > If you have an allergic reaction", "Allergens and Food Safety > Allergen information on menus"], "type": "multi-doc"}
+{"q": "do you deliver to Mumbai?", "relevant": [], "type": "out-of-scope"}
+{"q": "can I pay with a meal card?", "relevant": [], "type": "out-of-scope"}
+// near-miss: plausible questions the docs only PARTLY answer (or don't). Hallucination traps.
+{"q": "what's the delivery fee on an order?", "relevant": [], "type": "near-miss"}
+{"q": "is there a platform fee or packaging charge?", "relevant": [], "type": "near-miss"}
+{"q": "what's the minimum order value?", "relevant": [], "type": "near-miss"}
+{"q": "can I get my refund in cash?", "relevant": [], "type": "near-miss"}
+{"q": "I paid cash on delivery and something was missing, will the refund go to my UPI?", "relevant": [], "type": "near-miss"}
+{"q": "will my account get banned if I ask for too many refunds?", "relevant": [], "type": "near-miss"}
+{"q": "how much is the cancellation fee if the restaurant is already preparing a ₹600 order?", "relevant": [], "type": "near-miss"}
+{"q": "do I get compensation if the rain delay banner was showing when I ordered?", "relevant": [], "type": "near-miss"}
+{"q": "is the food at OrderPal restaurants FSSAI certified?", "relevant": [], "type": "near-miss"}
+{"q": "how quickly does support respond to an allergy report?", "relevant": [], "type": "near-miss"}
+
+// Allergens and Food Safety > Allergen information on menus
+// Allergens and Food Safety > Food safety standards
+// Allergens and Food Safety > If you have an allergic reaction
+// Allergens and Food Safety > Vegetarian and vegan labels
+// Cancellation Policy > After the order is out for delivery
+// Cancellation Policy > After the restaurant accepts the order
+// Cancellation Policy > Cancellations by the restaurant or OrderPal
+// Cancellation Policy > Free cancellation window
+// Cancellation Policy > Scheduled orders
+// Delivery Delays and ETA > How the ETA is calculated
+// Delivery Delays and ETA > The on-time promise
+// Delivery Delays and ETA > Tracking
+// Delivery Delays and ETA > When the promise does not apply
+// Refund Policy > How and when the money comes back
+// Refund Policy > Repeated refund requests
+// Refund Policy > Time limits
+// Refund Policy > What is not refundable
+// Refund Policy > When you are eligible for a refund
+
+
+// Type	Thinking prompt
+// direct	Rephrase a heading as a question
+// paraphrase	“How would my mom or my friend type this on WhatsApp?”
+// multi-doc	Situations that need two rules, e.g. a late order and wanting to cancel
+// negation	Questions about what you can’t do, or exceptions
+// hinglish	How Delhi actually texts support
+// vague	One or two words that a stressed user types
+// out-of-scope	Things a food app user might ask that no doc covers: use "relevant": []
+
+
+// Before any of the 30 questions
+// 3 graded questions (1 out-of-scope skipped), k=5
+
+//   recall@1   33.3%   right chunk ranked first
+//   recall@5  100.0%   right chunk anywhere in top 5
+//   MRR        0.583   average of 1/rank (1.0 = always first)
