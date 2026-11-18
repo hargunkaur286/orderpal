@@ -128,5 +128,17 @@ def main() -> None:
     print(f"Seeded {len(USERS)} users, {len(RESTAURANTS)} restaurants, 120 orders, policy docs.")
 
 
+def count_orders() -> int:
+    try:
+        with psycopg.connect(get_settings().database_url) as conn:
+            return conn.execute("SELECT count(*) FROM orders").fetchone()[0]
+    except psycopg.Error:
+        return 0
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--count-orders" in sys.argv:
+        print(count_orders())
+    else:
+        main()
