@@ -1,0 +1,840 @@
+{
+  "summary": {
+    "variant": "naive",
+    "questions": 39,
+    "attempted": 31,
+    "hallucination_rate": 0.0,
+    "claim_faithfulness": 1.0,
+    "refusal_accuracy": 1.0,
+    "answered_in_scope": 0.9393939393939394
+  },
+  "rows": [
+    {
+      "q": "how long does a card refund take",
+      "type": "direct",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "A refund to a credit or debit card takes 5–7 business days, depending on your bank [2].",
+      "claims": [
+        {
+          "claim": "A refund to a credit or debit card takes 5–7 business days, depending on your bank",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "my money hasn't come back yet",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "The time it takes for your money to come back depends on the payment method you used: OrderPal Wallet refunds are instant, UPI takes 1–3 business days, credit or debit cards take 5–7 business days depending on your bank, and cash on delivery orders are refunded exclusively to the OrderPal Wallet [1].",
+      "claims": [
+        {
+          "claim": "The time it takes for your money to come back depends on the payment method you used.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "OrderPal Wallet refunds are instant.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "UPI takes 1–3 business days.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Credit or debit cards take 5–7 business days depending on your bank.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Cash on delivery orders are refunded exclusively to the OrderPal Wallet.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "the order is 40 minutes late, can I still cancel without paying?",
+      "type": "multi-doc",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Yes, you can cancel without paying a fee if the order is more than 30 minutes past its promised delivery time [2, 4].",
+      "claims": [
+        {
+          "claim": "You can cancel without paying a fee if the order is more than 30 minutes past its promised delivery time.",
+          "supported": true,
+          "evidence": 4
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "what is your delivery partner's salary",
+      "type": "out-of-scope",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about the delivery partner's salary.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "Ordered last night, eligible for refund?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "You can request a refund within 48 hours of delivery for most issues [3], such as missing items, wrong items, quality issues, or if the order never arrived [1]. However, taste preferences are not refundable [4].",
+      "claims": [
+        {
+          "claim": "You can request a refund within 48 hours of delivery for most issues.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "Issues include missing items, wrong items, quality issues, or if the order never arrived.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Taste preferences are not refundable.",
+          "supported": true,
+          "evidence": 4
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "The condiments I ordered along with the food were expired, can I ask for a refund?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Yes, you can ask for a refund for expired food items under quality issues, provided you upload a photo within the app and raise the request within 48 hours of delivery [1, 4].",
+      "claims": [
+        {
+          "claim": "You can ask for a refund for expired food items under quality issues.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You must upload a photo within the app.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You must raise the request within 48 hours of delivery.",
+          "supported": true,
+          "evidence": 4
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "My food is 50 minutes late than the promised time, I want to cancel the order",
+      "type": "multi-doc",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Since your order is more than 30 minutes late, you can cancel it for a full refund if it is out for delivery [1], or cancel it for free if it has not been delivered yet [2]. Furthermore, if it is more than 60 minutes late, the entire order is refunded and you can keep the food if it arrives [2].",
+      "claims": [
+        {
+          "claim": "Since your order is more than 30 minutes late, you can cancel it for a full refund if it is out for delivery",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "you can cancel it for free if it has not been delivered yet",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "Furthermore, if it is more than 60 minutes late, the entire order is refunded and you can keep the food if it arrives",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I ordered by mistake, can I cancel the order?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "You can cancel any order free of charge within 60 seconds of placing it [2]. After that, the cancellation policy depends on the current status of your order (for example, if it is being prepared or is already out for delivery) [1, 5].",
+      "claims": [
+        {
+          "claim": "You can cancel any order free of charge within 60 seconds of placing it.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "After that, the cancellation policy depends on the current status of your order.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "This includes whether it is being prepared or is already out for delivery.",
+          "supported": true,
+          "evidence": 5
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I got the wrong order",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "If you received an item different from what you ordered, you will receive a full refund for that item, and you do not need to return it [1].",
+      "claims": [
+        {
+          "claim": "If you received an item different from what you ordered, you will receive a full refund for that item.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You do not need to return the wrong item.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I got an allergy after eating the food",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "If you have an allergic reaction, you should seek medical help first, then report the order from the app within 24 hours [1]. Allergy reports are escalated to a senior support agent within 1 hour, the restaurant's listing is reviewed, and you will receive a full refund for the order [1].",
+      "claims": [
+        {
+          "claim": "If you have an allergic reaction, you should seek medical help first",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Then report the order from the app within 24 hours",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Allergy reports are escalated to a senior support agent within 1 hour",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "The restaurant's listing is reviewed",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You will receive a full refund for the order",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "The dish had peanuts, which wasn't mentioned in the ingredients list",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Restaurants on OrderPal tag each menu item with major allergens like peanuts, but cross-contamination in a shared kitchen is always possible [1]. If you have a severe allergy, you should add a note in the cooking instructions and call the restaurant from the order page before preparation [1]. Regarding refunds, if you received a wrong item (different from what you ordered), you are eligible for a full refund for that item [3]. If it is considered a quality issue (e.g., unsafe food), you can upload a photo within the app for a review by a support agent, with refunds capped at the value of the affected items [3].",
+      "claims": [
+        {
+          "claim": "Restaurants on OrderPal tag each menu item with major allergens like peanuts",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "cross-contamination in a shared kitchen is always possible",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "If you have a severe allergy, you should add a note in the cooking instructions and call the restaurant from the order page before preparation",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "if you received a wrong item (different from what you ordered), you are eligible for a full refund for that item",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "If it is considered a quality issue (e.g., unsafe food), you can upload a photo within the app for a review by a support agent",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "refunds for quality issues are capped at the value of the affected items",
+          "supported": true,
+          "evidence": 3
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I want the same delivery partner who delivered my order last time",
+      "type": "out-of-scope",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I'm sorry, but the provided policies do not contain information on how to request a specific delivery partner.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "what time food last?",
+      "type": "vague",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about what time food lasts.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "mera food kab tak deliver ho jaayega?",
+      "type": "hinglish",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Every order has a promised delivery time, which is the estimated time of arrival (ETA) shown at checkout [1].",
+      "claims": [
+        {
+          "claim": "Every order has a promised delivery time, which is the estimated time of arrival (ETA) shown at checkout.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "what's the name of the chef that's making my food?",
+      "type": "out-of-scope",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about the chef making your food.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "How do I know my pastry doesn't contain eggs in it?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Restaurants on OrderPal tag menu items with major allergens, including eggs, which are provided by the restaurant and checked every 6 months [1]. Additionally, a green dot indicates a vegetarian item that contains no meat, fish, or eggs [2]. However, because cross-contamination in a shared kitchen is always possible, if you have a severe allergy, you should add a note in the cooking instructions and call the restaurant from the order page before preparation begins [1].",
+      "claims": [
+        {
+          "claim": "Restaurants on OrderPal tag menu items with major allergens, including eggs, which are provided by the restaurant and checked every 6 months.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Additionally, a green dot indicates a vegetarian item that contains no meat, fish, or eggs.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "However, because cross-contamination in a shared kitchen is always possible, if you have a severe allergy, you should add a note in the cooking instructions and call the restaurant from the order page before preparation begins.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "can I have an estimate of how much amount will I get refunded",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "The refund amount depends on the issue you experienced. For missing items, you receive a refund only for the missing items [3]. For wrong items, you get a full refund for that specific item [3]. For quality issues, refunds are capped at the value of the affected items [3]. If your order never arrived or was cancelled by the restaurant or OrderPal, you receive a full refund including delivery fees and taxes [3, 4].",
+      "claims": [
+        {
+          "claim": "The refund amount depends on the issue you experienced.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "For missing items, you receive a refund only for the missing items.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "For wrong items, you get a full refund for that specific item.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "For quality issues, refunds are capped at the value of the affected items.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "If your order never arrived or was cancelled by the restaurant or OrderPal, you receive a full refund including delivery fees and taxes.",
+          "supported": true,
+          "evidence": 3
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "does my food pass all the standards",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": false,
+      "answer": "I am sorry, but the provided information does not contain enough details about your specific food or order to determine if it passes all the standards.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "Can I cancel my order and get full refund?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Yes, you can cancel your order and get a full refund in the following situations: \n1. If you cancel free of charge within 60 seconds of placing the order, you will receive a full refund to your original payment method [2]. \n2. If the restaurant or OrderPal cancels your order for any reason, you will get a full refund including delivery fees, packaging charges, and taxes, along with a ₹50 OrderPal Wallet credit [1]. \n3. For scheduled orders, you can cancel free of charge up to 30 minutes before the scheduled time [5]. \n4. If your order is out for delivery, it cannot be cancelled from the app, but if it is delayed beyond 30 minutes past the promised time, support can cancel it with a full refund [3].",
+      "claims": [
+        {
+          "claim": "If you cancel free of charge within 60 seconds of placing the order, you will receive a full refund to your original payment method.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "If the restaurant or OrderPal cancels your order for any reason, you will get a full refund including delivery fees, packaging charges, and taxes, along with a ₹50 OrderPal Wallet credit.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "For scheduled orders, you can cancel free of charge up to 30 minutes before the scheduled time.",
+          "supported": true,
+          "evidence": 5
+        },
+        {
+          "claim": "If your order is out for delivery, it cannot be cancelled from the app, but if it is delayed beyond 30 minutes past the promised time, support can cancel it with a full refund.",
+          "supported": true,
+          "evidence": 3
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "what is the free cancellation window",
+      "type": "direct",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "You can cancel any order free of charge within 60 seconds of placing it [1].",
+      "claims": [
+        {
+          "claim": "You can cancel any order free of charge within 60 seconds of placing it",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "how is the estimated delivery time calculated",
+      "type": "direct",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "The estimated delivery time shown at checkout is calculated by combining the restaurant's average preparation time for your items, the distance from the restaurant to you, current traffic conditions, and the number of available delivery partners nearby [1].",
+      "claims": [
+        {
+          "claim": "The estimated delivery time shown at checkout is calculated by combining the restaurant's average preparation time for your items, the distance from the restaurant to you, current traffic conditions, and the number of available delivery partners nearby.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "when does the on-time promise not apply",
+      "type": "direct",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "The on-time promise does not apply during heavy rain or other severe weather when a \"weather delay\" banner is shown before you order, when you change the delivery address after placing the order, or for large orders above ₹3,000 [1].",
+      "claims": [
+        {
+          "claim": "The on-time promise does not apply during heavy rain or other severe weather when a \"weather delay\" banner is shown before you order.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "The on-time promise does not apply when you change the delivery address after placing the order.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "The on-time promise does not apply for large orders above ₹3,000.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "can I cancel a scheduled order",
+      "type": "direct",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Yes, scheduled orders can be cancelled free of charge up to 30 minutes before the scheduled time [1].",
+      "claims": [
+        {
+          "claim": "Scheduled orders can be cancelled free of charge up to 30 minutes before the scheduled time.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "restaurant cancelled my biryani order on their own, do I get anything extra?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Yes, if the restaurant or OrderPal cancels your order for any reason, you will receive a full refund (including the delivery fee, packaging charges, and taxes) as well as a ₹50 OrderPal Wallet credit as an apology (at most once per day) [1].",
+      "claims": [
+        {
+          "claim": "If the restaurant or OrderPal cancels your order for any reason, you will receive a full refund, including the delivery fee, packaging charges, and taxes",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You will also receive a ₹50 OrderPal Wallet credit as an apology, at most once per day",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I've asked for refunds a lot this month, why is my new one taking so long?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Accounts with more than 5 refund requests in 30 days are reviewed manually, and during this review, new refund requests may take up to 72 hours to process [1].",
+      "claims": [
+        {
+          "claim": "Accounts with more than 5 refund requests in 30 days are reviewed manually",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "During review, new refund requests may take up to 72 hours to process",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "the rider's location on the map hasn't moved for ages",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "You can track your delivery partner live once the order is out for delivery. If the map has not moved for more than 10 minutes, you should contact support from the order page [1].",
+      "claims": [
+        {
+          "claim": "You can track your delivery partner live once the order is out for delivery.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "If the map has not moved for more than 10 minutes, you should contact support from the order page.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I tipped the delivery guy by mistake, can I get it back?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "No, tips given to the delivery partner are not refundable as they go fully to the partner and cannot be reversed [1].",
+      "claims": [
+        {
+          "claim": "Tips given to the delivery partner are not refundable.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Tips go fully to the partner and cannot be reversed.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "is vegan food on the app actually checked?",
+      "type": "paraphrase",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "OrderPal does not currently verify vegan claims, so you should treat those as the restaurant's own description [1].",
+      "claims": [
+        {
+          "claim": "OrderPal does not currently verify vegan claims.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You should treat vegan claims as the restaurant's own description.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "what things will you NOT refund?",
+      "type": "negation",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "We do not refund taste preferences (\"I didn't like it\") when the food was prepared correctly, delivery fees (unless the whole order was not delivered or was delivered more than 30 minutes after the promised time), or tips given to the delivery partner [2].",
+      "claims": [
+        {
+          "claim": "We do not refund taste preferences when the food was prepared correctly.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "We do not refund delivery fees unless the whole order was not delivered or was delivered more than 30 minutes after the promised time.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "We do not refund tips given to the delivery partner.",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "why can't I cancel from the app anymore? the rider already picked it up",
+      "type": "negation",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Orders with the status \"out_for_delivery\" cannot be cancelled directly from the app. You will need to contact support to handle the cancellation [1].",
+      "claims": [
+        {
+          "claim": "Orders with the status out_for_delivery cannot be cancelled directly from the app.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You will need to contact support to handle the cancellation.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "it's pouring outside and my order is super late, do I still get the late credit?",
+      "type": "negation",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "The on-time promise and late credits do not apply during heavy rain or severe weather, provided the app displays a \"weather delay\" banner before you place your order [2].",
+      "claims": [
+        {
+          "claim": "The on-time promise and late credits do not apply during heavy rain or severe weather, provided the app displays a \"weather delay\" banner before you place your order.",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "refund kitne din mein aayega card pe?",
+      "type": "hinglish",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Credit or debit card se refund aane mein 5–7 business days lagte hain, jo ki aapke bank par nirbhar karta hai [3].",
+      "claims": [
+        {
+          "claim": "Credit or debit card se refund aane mein 5–7 business days lagte hain",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "Ye aapke bank par nirbhar karta hai",
+          "supported": true,
+          "evidence": 3
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "order cancel karna hai, restaurant ne already bana diya, paise katenge kya?",
+      "type": "hinglish",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Haan, agar restaurant ne order accept karke usko banana shuru kar diya hai (status 'preparing'), toh cancel karne par 100% order value ke barabar cancellation fee lagegi, kyunki khana ban chuka hota hai aur use dobara becha nahi ja sakta [4]. Lekin agar order apne promised delivery time se 30 minute se zyada late hai, restaurant ne koi item out of stock bataya ho aur aap substitution accept na karein, ya 20 minute tak delivery partner assign na ho, toh cancellation free rehta hai [4].",
+      "claims": [
+        {
+          "claim": "Agar restaurant ne order accept karke usko banana shuru kar diya hai (status 'preparing'), toh cancel karne par 100% order value ke barabar cancellation fee lagegi.",
+          "supported": true,
+          "evidence": 4
+        },
+        {
+          "claim": "Khana ban chuka hota hai aur use dobara becha nahi ja sakta.",
+          "supported": true,
+          "evidence": 4
+        },
+        {
+          "claim": "Lekin agar order apne promised delivery time se 30 minute se zyada late hai, toh cancellation free rehta hai.",
+          "supported": true,
+          "evidence": 4
+        },
+        {
+          "claim": "Restaurant ne koi item out of stock bataya ho aur aap substitution accept na karein, toh cancellation free rehta hai.",
+          "supported": true,
+          "evidence": 4
+        },
+        {
+          "claim": "20 minute tak delivery partner assign na ho, toh cancellation free rehta hai.",
+          "supported": true,
+          "evidence": 4
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "refund?",
+      "type": "vague",
+      "in_scope": true,
+      "answerable": false,
+      "answer": "Could you please provide more details about your issue? You can request a refund for missing items, wrong items, quality issues, orders that never arrived, or cancellations by the restaurant or OrderPal [1, 5].",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "late order",
+      "type": "vague",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "If your order arrives late, the following compensation applies based on the delay: \n- **10 to 30 minutes late:** You receive ₹30 OrderPal Wallet credit automatically within 1 hour [1].\n- **More than 30 minutes late:** The delivery fee is refunded, and you can cancel the order for free if it has not been delivered yet [1]. Support can also cancel it with a full refund [2].\n- **More than 60 minutes late:** The entire order is refunded, and you can still keep the food if it arrives [1].\n\nNote that the on-time promise does not apply during heavy rain or severe weather (if a weather banner is shown), if you changed the delivery address after placing the order, or for large orders above ₹3,000 [3].",
+      "claims": [
+        {
+          "claim": "If your order is 10 to 30 minutes late, you receive ₹30 OrderPal Wallet credit automatically within 1 hour.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "If your order is more than 30 minutes late, the delivery fee is refunded.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "If your order is more than 30 minutes late, you can cancel the order for free if it has not been delivered yet.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "If your order is delayed beyond 30 minutes past the promised time, support can also cancel it with a full refund.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "If your order is more than 60 minutes late, the entire order is refunded, and you can still keep the food if it arrives.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "The on-time promise does not apply during heavy rain or severe weather if a weather banner is shown.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "The on-time promise does not apply if you changed the delivery address after placing the order.",
+          "supported": true,
+          "evidence": 3
+        },
+        {
+          "claim": "The on-time promise does not apply for large orders above ₹3,000.",
+          "supported": true,
+          "evidence": 3
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "food came 70 minutes late and was cold, what do I get back?",
+      "type": "multi-doc",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "Since your order arrived more than 60 minutes late, the entire order is refunded, and you can still keep the food [1].",
+      "claims": [
+        {
+          "claim": "Since your order arrived more than 60 minutes late, the entire order is refunded",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "you can still keep the food",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "I had a reaction to a dish that wasn't tagged with my allergen, what now?",
+      "type": "multi-doc",
+      "in_scope": true,
+      "answerable": true,
+      "answer": "If you have an allergic reaction, seek medical help first [2]. Then report the order from the app within 24 hours [2]. Allergy reports are escalated to a senior support agent within 1 hour, the restaurant's listing is reviewed, and you will receive a full refund for the order [2].",
+      "claims": [
+        {
+          "claim": "If you have an allergic reaction, seek medical help first.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "Report the order from the app within 24 hours.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "Allergy reports are escalated to a senior support agent within 1 hour.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "The restaurant's listing is reviewed.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "You will receive a full refund for the order.",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "do you deliver to Mumbai?",
+      "type": "out-of-scope",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about whether we deliver to Mumbai.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "can I pay with a meal card?",
+      "type": "out-of-scope",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided policies do not contain information about whether you can pay with a meal card.",
+      "claims": [],
+      "unsupported": []
+    }
+  ]
+}

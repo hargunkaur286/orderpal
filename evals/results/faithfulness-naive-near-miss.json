@@ -1,0 +1,170 @@
+{
+  "summary": {
+    "variant": "naive",
+    "questions": 10,
+    "attempted": 6,
+    "hallucination_rate": 0.3333333333333333,
+    "claim_faithfulness": 0.8181818181818182,
+    "near_miss_hallucinated": 2,
+    "near_miss_total": 10,
+    "refusal_accuracy": 0.4,
+    "answered_in_scope": 0.0
+  },
+  "rows": [
+    {
+      "q": "what's the delivery fee on an order?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I'm sorry, but the provided passages do not contain information about the cost or amount of the delivery fee.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "is there a platform fee or packaging charge?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about a platform fee, though it briefly mentions packaging charges in the context of refunds for cancelled orders [3].",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "what's the minimum order value?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided context does not contain information about the minimum order value.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "can I get my refund in cash?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "No, refunds cannot be issued in cash. Cash on delivery orders are refunded to the OrderPal Wallet only [1].",
+      "claims": [
+        {
+          "claim": "Refunds cannot be issued in cash.",
+          "supported": false,
+          "evidence": 0
+        },
+        {
+          "claim": "Cash on delivery orders are refunded to the OrderPal Wallet only.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": [
+        "Refunds cannot be issued in cash."
+      ]
+    },
+    {
+      "q": "I paid cash on delivery and something was missing, will the refund go to my UPI?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "No, refunds for cash on delivery orders are refunded exclusively to the OrderPal Wallet [1].",
+      "claims": [
+        {
+          "claim": "Refunds for cash on delivery orders are refunded exclusively to the OrderPal Wallet.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "will my account get banned if I ask for too many refunds?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "The provided policies do not state that your account will be banned for asking for too many refunds. However, accounts with more than 5 refund requests in 30 days are reviewed manually, and new refund requests during this review may take up to 72 hours to process [1].",
+      "claims": [
+        {
+          "claim": "The provided policies do not state that your account will be banned for asking for too many refunds.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "Accounts with more than 5 refund requests in 30 days are reviewed manually.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "During this review, new refund requests may take up to 72 hours to process.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "how much is the cancellation fee if the restaurant is already preparing a ₹600 order?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "If the restaurant has already accepted the order and started preparing it, the cancellation fee is equal to 100% of the order value [2]. For a ₹600 order, the cancellation fee would be ₹600 [2].",
+      "claims": [
+        {
+          "claim": "If the restaurant has already accepted the order and started preparing it, the cancellation fee is equal to 100% of the order value.",
+          "supported": true,
+          "evidence": 2
+        },
+        {
+          "claim": "For a ₹600 order, the cancellation fee would be ₹600.",
+          "supported": false,
+          "evidence": 0
+        }
+      ],
+      "unsupported": [
+        "For a ₹600 order, the cancellation fee would be ₹600."
+      ]
+    },
+    {
+      "q": "do I get compensation if the rain delay banner was showing when I ordered?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "No, the on-time promise does not apply during heavy rain or severe weather if the app shows a \"weather delay\" banner before you order [1]. Therefore, you do not receive compensation under those circumstances.",
+      "claims": [
+        {
+          "claim": "The on-time promise does not apply during heavy rain or severe weather if the app shows a weather delay banner before you order.",
+          "supported": true,
+          "evidence": 1
+        },
+        {
+          "claim": "You do not receive compensation under those circumstances.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "is the food at OrderPal restaurants FSSAI certified?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I am sorry, but the provided information does not mention whether the food at OrderPal restaurants is FSSAI certified. It only states that restaurants must hold a valid food safety licence and have a hygiene rating of at least 3 out of 5 [2].",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "how quickly does support respond to an allergy report?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "Allergy reports are escalated to a senior support agent within 1 hour [1].",
+      "claims": [
+        {
+          "claim": "Allergy reports are escalated to a senior support agent within 1 hour",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    }
+  ]
+}

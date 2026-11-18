@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      faithfulness:
+        description: "Also run the LLM faithfulness eval (uses the GEMINI_API_KEY repo secret and API quota)"
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    # Same images as docker-compose.yml, on the same host ports, so the app's defaults just work.
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: orderpal
+          POSTGRES_PASSWORD: orderpal
+          POSTGRES_DB: orderpal
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U orderpal"
+          --health-interval 3s
+          --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ["6380:6379"]
+
+    env:
+      PGPASSWORD: orderpal
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        # CPU-only PyTorch: the default Linux wheel bundles CUDA and is ~2 GB we'd never use.
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Cache Hugging Face models (embedder + reranker)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-models-${{ hashFiles('app/rag/embeddings.py', 'app/rag/retriever.py', 'app/config.py') }}
+
+      - name: Database (schema, migrations, seed data, embeddings)
+        run: |
+          psql -h localhost -p 5433 -U orderpal -d orderpal -v ON_ERROR_STOP=1 -f db/schema.sql
+          python -m scripts.migrate
+          python -m scripts.seed
+          python -m scripts.ingest
+
+      - name: Tests (LLM-free; live tests are excluded by pytest.ini)
+        run: pytest -q
+
+      - name: Retrieval quality gate
+        # Fails the build if a change to chunking/embeddings/search makes retrieval worse.
+        run: python -m evals.run_retrieval --min-recall1 0.75
+
+      - name: Faithfulness eval (manual runs only)
+        if: github.event_name == 'workflow_dispatch' && inputs.faithfulness
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m evals.run_faithfulness
+
+      - name: Upload eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: evals/results/
+          if-no-files-found: ignore

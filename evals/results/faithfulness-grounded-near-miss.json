@@ -1,0 +1,129 @@
+{
+  "summary": {
+    "variant": "grounded",
+    "questions": 10,
+    "attempted": 4,
+    "hallucination_rate": 0.0,
+    "claim_faithfulness": 1.0,
+    "near_miss_hallucinated": 0,
+    "near_miss_total": 10,
+    "refusal_accuracy": 0.6,
+    "answered_in_scope": 0.0
+  },
+  "rows": [
+    {
+      "q": "what's the delivery fee on an order?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information in the provided passages. You can contact support for assistance.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "is there a platform fee or packaging charge?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information and you can contact support.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "what's the minimum order value?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information and you can contact support.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "can I get my refund in cash?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information in my guidelines, and you can contact support for assistance.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "I paid cash on delivery and something was missing, will the refund go to my UPI?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "Cash on delivery orders are refunded to the OrderPal Wallet only [2].",
+      "claims": [
+        {
+          "claim": "Cash on delivery orders are refunded to the OrderPal Wallet only",
+          "supported": true,
+          "evidence": 2
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "will my account get banned if I ask for too many refunds?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information and you can contact support.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "how much is the cancellation fee if the restaurant is already preparing a ₹600 order?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "If the restaurant is already preparing your order, cancelling costs a cancellation fee equal to 100% of the order value [1].",
+      "claims": [
+        {
+          "claim": "If the restaurant is already preparing your order, cancelling costs a cancellation fee equal to 100% of the order value",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "do I get compensation if the rain delay banner was showing when I ordered?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "The on-time promise does not apply during heavy rain or other severe weather when the app shows a weather delay banner before you order [1].",
+      "claims": [
+        {
+          "claim": "The on-time promise does not apply during heavy rain or other severe weather when the app shows a weather delay banner before you order.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    },
+    {
+      "q": "is the food at OrderPal restaurants FSSAI certified?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": false,
+      "answer": "I don't have that information. You can contact support for assistance.",
+      "claims": [],
+      "unsupported": []
+    },
+    {
+      "q": "how quickly does support respond to an allergy report?",
+      "type": "near-miss",
+      "in_scope": false,
+      "answerable": true,
+      "answer": "Allergy reports are escalated to a senior support agent within 1 hour [1].",
+      "claims": [
+        {
+          "claim": "Allergy reports are escalated to a senior support agent within 1 hour.",
+          "supported": true,
+          "evidence": 1
+        }
+      ],
+      "unsupported": []
+    }
+  ]
+}
