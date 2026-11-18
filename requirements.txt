@@ -21,3 +21,6 @@ google-genai>=1.0
 langgraph
 langchain-google-genai
 langgraph-checkpoint-postgres
+
+# Phase 9: MCP server
+mcp>=1.0
