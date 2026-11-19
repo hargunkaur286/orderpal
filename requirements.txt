@@ -12,7 +12,7 @@ pytest-asyncio==0.24.*
 httpx==0.27.*
 
 # Phase 2: embeddings (pulls in PyTorch)
-sentence-transformers==3.*
+sentence-transformers==6.*   # 6.x: compatible with the Gradio Space's huggingface-hub
 
 # Phase 4: LLM (Gemini)
 google-genai>=1.0

@@ -12,7 +12,9 @@ def make_pool() -> AsyncConnectionPool:
         get_settings().database_url,
         min_size=1,
         max_size=10,
-        kwargs={"row_factory": dict_row},   # rows come back as dicts, not tuples
+        # rows as dicts. prepare_threshold=None: no server-side prepared statements, which break behind
+        # transaction-mode poolers like PgBouncer (Neon's "-pooler" endpoints).
+        kwargs={"row_factory": dict_row, "prepare_threshold": None},
         open=False,                          # opened explicitly in the app lifespan
         configure=register_vector_async,     # each new connection learns the pgvector type
     )

@@ -1,0 +1,16 @@
+# Requirements for the Hugging Face Space (Gradio SDK). The Space installs gradio itself.
+# CPU-only PyTorch: the default Linux wheel bundles CUDA (~2 GB) that a CPU Space never uses.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+fastapi>=0.164
+uvicorn[standard]>=0.32
+pydantic-settings==2.*
+psycopg[binary]==3.2.*
+psycopg-pool==3.2.*
+pgvector==0.3.*
+redis==5.*
+sentence-transformers==6.*
+google-genai>=1.0
+langgraph
+langchain-google-genai
+langgraph-checkpoint-postgres
