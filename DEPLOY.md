@@ -1,89 +1,98 @@
-# Deploying OrderPal (free tier)
+# Deploying OrderPal
 
-Three free services: the app on a **Hugging Face Space** (Gradio SDK as the runtime), Postgres +
-pgvector on **Neon**, Redis on **Upstash**. Total cost: ₹0, plus whatever LLM usage the demo generates.
+The app runs on **Google Cloud Run** from this repo's `Dockerfile`, with Postgres + pgvector on
+**Neon** and Redis on **Upstash**. Every push to `main` rebuilds and redeploys automatically.
 
 ```
-browser ──▶ HF Space: python hf_space.py → OrderPal's FastAPI app on port 7860
-                 ├──▶ Neon      Postgres 16 + pgvector   (orders, chunks, conversations, usage)
-                 ├──▶ Upstash   Redis                    (rate limiting)
-                 └──▶ Gemini API                         (LLM)
+GitHub main ──push──▶ Cloud Build (docker build) ──▶ Artifact Registry ──▶ Cloud Run (scales 0..1)
+                                                                              ├──▶ Neon     Postgres + pgvector
+browser ──HTTPS──▶ Cloud Run service URL ─────────────────────────────────────├──▶ Upstash  Redis (TLS)
+                                                                              └──▶ Gemini API
 ```
 
-Why the Gradio SDK: Docker Spaces need a paid plan. A Gradio Space runs any Python file that serves
-on port 7860, so `hf_space.py` prepares the database and starts our own FastAPI app. There's no
-Gradio UI; Gradio is only the free runtime.
+Cost: a demo fits Cloud Run's free tier (2M requests and 360,000 GiB-seconds a month). The ~2 GB
+image costs a little in Artifact Registry storage, on the order of a few rupees a month. The budget
+alert and the max-instances cap below are what keep it there.
 
 ## Rules for secrets (read first)
-- Connection strings and API keys go **only** into the Space's **Secrets**. Never into `.env`,
+- Connection strings and API keys go **only** into Google **Secret Manager**. Never into `.env`,
   a commit, a chat, or a screenshot. Your local `.env` keeps pointing at the local Docker database.
-- If a secret ever appears anywhere else, rotate it: Neon → Roles → reset password; Upstash →
-  reset password; Google AI Studio → delete key, create a new one.
-- Set a spend limit or budget alert on the Gemini key. A public link means strangers can use it.
+- If a secret appears anywhere else, rotate it: Neon → Roles → reset password; Upstash → reset
+  password; Google AI Studio → delete the key and create a new one.
 
-## 1. Postgres: Neon
-1. Create a project at neon.tech (region: Singapore, closest to India).
-2. Copy the **direct** connection string, not the pooled one: in the connect dialog turn **off**
-   "Connection pooling", so the host has no `-pooler` in it. It looks like
-   `postgresql://user:pass@ep-xxx.ap-southeast-1.aws.neon.tech/neondb?sslmode=require`
-   (Pooled endpoints use PgBouncer transaction mode, which doesn't suit the checkpointer's long-lived
-   connections. The app disables prepared statements anyway, but direct is simpler.)
-3. Nothing else: the app creates the `vector` extension and all tables on first boot.
+## 0. Google Cloud project and a budget alert
+1. console.cloud.google.com → create a project, e.g. `orderpal`. Add a billing account (card needed).
+2. **Billing → Budgets & alerts → Create budget**: scope this project, amount ₹100 (or $1),
+   alerts at 50%, 90%, 100%. A budget alerts, it does not stop spending; the instance cap below does.
+3. **APIs & Services → Enable**: Cloud Run Admin API, Cloud Build API, Artifact Registry API,
+   Secret Manager API. (The console also offers to enable these when you first need them.)
 
-## 2. Redis: Upstash
-1. Create a Redis database at upstash.com (same region).
-2. Copy the **TLS URL**: `rediss://default:<password>@<host>.upstash.io:6379` (`rediss`, two s's = TLS).
+## 1. Postgres: Neon and Redis: Upstash
+- Neon (region Singapore): copy the **direct** connection string (pooling off, no `-pooler` in the
+  host), ending in `?sslmode=require`. The app creates the `vector` extension and all tables itself.
+- Upstash (same region): copy the **TLS URL** from Connect → Redis:
+  `rediss://default:<password>@<name>.upstash.io:6379`. It must start with `rediss://`.
 
-## 3. The app: Hugging Face Space
-1. huggingface.co → **New Space** → owner + name `orderpal` → SDK **Gradio**, template **Blank**,
-   license **apache-2.0**, hardware **CPU basic (free)**, **Public** → Create Space.
-2. In the Space: **Settings → Variables and secrets**.
-   **Secrets**:
-   | name | value |
-   |---|---|
-   | `DATABASE_URL` | the Neon direct string |
-   | `REDIS_URL` | the Upstash `rediss://` URL |
-   | `GEMINI_API_KEY` | your key |
+## 2. Secrets
+**Security → Secret Manager → Create secret**, three times. Paste only the value: no quotes, no
+spaces, no "name ->" prefix.
+| secret name | value |
+|---|---|
+| `orderpal-database-url` | the Neon direct string |
+| `orderpal-redis-url` | the Upstash `rediss://` URL |
+| `orderpal-gemini-key` | your Gemini API key |
 
-   **Variables**: `DEMO_RESEED_ON_START=1`, `RATE_LIMIT_PER_MINUTE=10`
-3. Create a Hugging Face **access token** with **write** permission (Settings → Access Tokens).
-   Git will ask for it as the password when you push.
-4. From the project folder, add the Space as a git remote and publish:
-   ```bash
-   git remote add space https://huggingface.co/spaces/<your-hf-username>/orderpal
-   sh scripts/push_space.sh
-   ```
-   The script pushes the current commit plus a Space-only commit (Space config at the top of
-   README.md, and `requirements-space.txt` as `requirements.txt`). GitHub never sees that commit.
-   Commit your work first: the script publishes `HEAD`, not uncommitted changes.
-5. Watch **Logs** in the Space. The first build takes ~10 minutes (PyTorch). On boot it runs
-   migrations, loads demo data, embeds the policies (downloads two small models the first time),
-   then serves the chat page.
+## 3. Create the Cloud Run service
+**Cloud Run → Deploy container → Service → "Continuously deploy from a repository"**
+1. **Set up with Cloud Build** → connect GitHub → repo `hargunkaur286/orderpal`, branch `^main$`,
+   build type **Dockerfile**, source location `/Dockerfile` → Save.
+2. **Service name** `orderpal`, **region** `asia-southeast1 (Singapore)` (same region as Neon).
+3. **Authentication**: Allow public access (it's a public demo; the app rate-limits per user).
+4. **Billing**: request-based. **Scaling**: min instances **0**, max instances **1**.
+   (Max 1 caps cost, and it also stops two instances reseeding the demo data at the same time.)
+5. **Container(s), Volumes... → Settings**:
+   - Container port: `8080` (the default; the app listens on whatever `$PORT` Cloud Run sets)
+   - Memory **2 GiB**, CPU **1**
+   - Request timeout **300** seconds (chat replies stream over one long request)
+   - Startup CPU boost: **on** (faster cold starts)
+6. **Variables & Secrets**:
+   - Environment variables: `DEMO_RESEED_ON_START` = `1`, `RATE_LIMIT_PER_MINUTE` = `10`
+   - **Reference a secret** (exposed as environment variable, version `latest`):
+     `DATABASE_URL` ← `orderpal-database-url`, `REDIS_URL` ← `orderpal-redis-url`,
+     `GEMINI_API_KEY` ← `orderpal-gemini-key`.
+     If the console says the service account can't access the secret, click **Grant** (it adds the
+     "Secret Manager Secret Accessor" role).
+7. **Create**. The first build takes ~10 minutes (PyTorch + models). Watch it under
+   **Cloud Build → History**, then the service's **Logs** tab.
 
-## Free-tier behaviour to know
-- The Space **sleeps after inactivity**. The first visit afterwards takes about a minute to wake.
-  With `DEMO_RESEED_ON_START=1` each wake reloads demo data, so in-progress orders look fresh.
-- Neon suspends idle databases; the first query after that is a bit slower.
+On boot the container runs migrations (and `schema.sql` on an empty database), reloads demo data
+(because `DEMO_RESEED_ON_START=1`), embeds the policies, then starts serving. A cold start after
+scaling to zero takes roughly 30–60 seconds; after that requests are fast.
 
 ## Check it works
-- `https://<your-hf-username>-orderpal.hf.space/health` → `{"status":"ok","db":"ok","redis":"ok"}`
-- Open the Space, pick a customer, click a suggestion.
-- `/admin/usage` shows requests, tokens and latency once people use it.
+- `https://<service-url>/health` → `{"status":"ok","db":"ok","redis":"ok"}`
+- Open the service URL, pick a customer, click a suggestion.
+- `/admin/usage` shows requests, tokens and latency.
 
 ## Troubleshooting
-| Log shows | Cause | Fix |
+| Logs show | Cause | Fix |
 |---|---|---|
-| `connection refused` / timeout to Neon | Wrong string, or pooled host | Use the direct string with `?sslmode=require` |
-| `prepared statement ... does not exist` | Pooled (`-pooler`) host | Switch to the direct string |
-| Redis `Connection reset` | `redis://` instead of `rediss://` | Use the TLS URL |
-| `GEMINI_API_KEY is not set` on first chat | Secret missing or misspelled | Add it under Secrets, restart the Space |
-| Build fails resolving packages | Gradio version changed | Keep `sdk_version` in `scripts/push_space.sh` at a tested version |
+| `Redis URL must specify one of the following schemes` | Secret isn't a bare `rediss://` URL | Re-create the secret with only the URL |
+| `connection refused` / timeout to Neon | Wrong string or pooled host | Direct string, `?sslmode=require` |
+| `Permission denied on secret` | Runtime service account lacks access | Grant "Secret Manager Secret Accessor" |
+| `Container failed to start and listen on the port` | Boot took too long or crashed | Read the lines above it in Logs; check the three secrets |
+| `Memory limit exceeded` | Under 2 GiB | Set memory to 2 GiB |
+| Chat says "assistant is unavailable" | Gemini key missing or quota hit | Check the secret; check AI Studio quota |
 
-## Running the same app locally in Docker
-The `Dockerfile` still works anywhere Docker runs (e.g. Google Cloud Run):
+## Alternative: Hugging Face Space
+`hf_space.py` and `scripts/push_space.sh` run the app inside a Gradio Space. Free accounts get
+ZeroGPU hardware for Gradio Spaces, which stops apps that don't use the GPU, so this route needs
+HF PRO (for CPU basic hardware) to work.
+
+## Running the image locally
 ```bash
 docker build -t orderpal .
-docker run --rm -p 7860:7860 --env-file .env \
+docker run --rm -p 8080:8080 -e PORT=8080 \
   -e DATABASE_URL=postgresql://orderpal:orderpal@host.docker.internal:5433/orderpal \
-  -e REDIS_URL=redis://host.docker.internal:6380/0 orderpal
+  -e REDIS_URL=redis://host.docker.internal:6380/0 -e GEMINI_API_KEY=... orderpal
 ```

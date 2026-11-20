@@ -1,12 +1,13 @@
 """Phase 9: the MCP server, tested the way a real MCP client uses it (subprocess over stdio)."""
 import os
+import sys
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 
 async def _session_call(user_id: str, tool: str, args: dict):
-    params = StdioServerParameters(command=".venv/bin/python", args=["-m", "app.mcp_server"],
+    params = StdioServerParameters(command=sys.executable, args=["-m", "app.mcp_server"],   # the interpreter running pytest
                                    cwd=os.getcwd(), env={**os.environ, "ORDERPAL_USER_ID": user_id})
     async with stdio_client(params) as (read, write), ClientSession(read, write) as s:
         await s.initialize()

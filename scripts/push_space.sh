@@ -11,6 +11,8 @@ REMOTE="${1:-space}"
 ROOT="$(git rev-parse --show-toplevel)"
 TMP="$(mktemp -d)"
 git -C "$ROOT" worktree add --detach "$TMP" HEAD >/dev/null
+# Remove the temporary checkout however the script ends, including a failed push.
+trap 'cd "$ROOT"; git worktree remove --force "$TMP" 2>/dev/null; git worktree prune' EXIT
 cd "$TMP"
 cp requirements-space.txt requirements.txt
 {
@@ -35,6 +37,4 @@ YAML
 git add -A
 git commit -q -m "Hugging Face Space build of $(git rev-parse --short HEAD)"
 git push --force "$REMOTE" HEAD:main
-cd "$ROOT"
-git worktree remove --force "$TMP"
 echo "Pushed. Watch the build in the Space's Logs tab."
